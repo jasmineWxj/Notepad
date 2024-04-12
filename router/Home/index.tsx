@@ -6,10 +6,11 @@ import { WebView } from 'react-native-webview'
 const Home = () => {
   return (
     <WebView
-      source={require('./index.html')}
-      style={{
-        flex: 1
-      }}
+    originWhitelist={['*']}
+    scalesPageToFit={false}
+    useWebKit={true}
+    javaScriptEnabled={true}
+    source = {{'uri':'file:///android_asset/web/index.html'}}
     />
   )
 }
