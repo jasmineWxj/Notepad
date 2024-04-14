@@ -1,35 +1,18 @@
-import React, { useRef } from 'react'
-import { View, Text, Button, Alert } from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { WebView } from 'react-native-webview'
+import React, { useRef, useState } from 'react'
+import { View, Text, Alert, Image, StyleSheet, StatusBar, ScrollView, Dimensions, Animated } from 'react-native'
+import { createStackNavigator } from '@react-navigation/stack';
+const Stack = createStackNavigator();
+import EditPage from './page/edit';
+import HomePage from './page';
 
 const Home = () => {
-  let webViewRef = useRef() as any;
-
-  function _onH5Message(event: any) {
-    var data = JSON.stringify(event.nativeEvent.data);
-    const a = JSON.parse(event.nativeEvent.data)
-    
-    webViewRef.injectJavaScript(`receiveMessage("RN向H5发送消息");true;`)
-  }
-
-
   return (
-    <>
-      <Text>pkpk</Text>
-      <WebView
-        ref={r => (webViewRef = r)}
-        source={require('./index.html')}
-        javaScriptEnabled={true}
-        style={{
-          flex: 1
-        }}
-        onMessage={_onH5Message}
-
-        injectedJavaScript={'onRNMessage("RN load success!")'}
-      />
-    </>
+    <Stack.Navigator initialRouteName='HomePage' headerMode='none'>
+      <Stack.Screen name="Edit" component={EditPage}   />
+      <Stack.Screen name="HomePage" component={HomePage}/>
+    </Stack.Navigator>
   )
+
 }
 
 export default Home;
